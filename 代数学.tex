@@ -1,0 +1,245 @@
+\documentclass{exam-zh}
+\usepackage{mathtools}
+\setlength{\baselineskip}{10pt}
+\examsetup{solution/show-solution = show-stay}
+
+\newcommand{\NN}{{\mathbb{N}}}
+\newcommand{\ZZ}{{\mathbb{Z}}}
+\newcommand{\QQ}{{\mathbb{Q}}}
+\newcommand{\RR}{{\mathbb{R}}}
+\newcommand{\CC}{{\mathbb{C}}}
+\newcommand{\Gl}{{\mathsf{GL}}}
+
+\newcommand{\isom}{\simeq}
+
+\let \hom \relax
+\DeclareMathOperator{\hom}{Hom}
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\gal}{Gal}
+\DeclareMathOperator{\id}{id}
+
+\begin{document}
+\begin{question}
+  Let $G$ be a set with an operation $\cdot$ such that\[ (a\cdot b)\cdot c = a \cdot (b\cdot c)\] for any $a, b, c\in G$. Then if $G$ satisfies that
+  \begin{enumerate}
+    \item[(1)] there exists $e\in G$, such that $a\cdot e = a$ for any $a\in G$;
+    \item[(2)] for any $a\in G$, there exists $b\in G$ such that $a\cdot b=e$.
+  \end{enumerate}
+  Then $(G, \cdot, e)$ is a group.
+\end{question}
+\begin{solution}
+  我们需要证明: (i) 对任意 $a\in G$, 我们有$e\cdot a = a\cdot e=a$.  (ii) 对任意 $a\in G$, 存在 $b\in G$, 使得 $a\cdot b= b\cdot a=e$.
+  
+  对任意 $a\in G$, 根据(1), 存在 $b, c\in G$ 使得 $a\cdot b = b\cdot c=e$. 现考虑 $b\cdot a = b\cdot a \cdot e =b\cdot a\cdot (b\cdot c)=b\cdot (a\cdot b)\cdot c=(b\cdot e)\cdot c=b\cdot c=e$. 所以 $a\cdot b=b\cdot a=e$, 即(i)成立.
+  
+  对上述 $a, b\in G$, $e\cdot a= (a\cdot b)\cdot a=a\cdot (b\cdot a)=a\cdot e=a$. 所以 $a\cdot e=e\cdot a =a$, 即(ii)成立. 
+\end{solution}
+\begin{question}
+  Let $G:=\{(a_{ij})_{n\times n} | a_{ij}\in \ZZ \text{ and } |(a_{ij})_{n\times n}|=1 \text{ or }-1\}$. Prove that $G$ is a group respect to the matrix multiplication.
+\end{question}
+\begin{solution}
+ 假设 $A=(a_{ij})_{n\times n}, B=(b_{ij})_{n\times b}\in G$. 根据矩阵的乘法, 我们有 $|AB|=|A||B|$, 故 $|AB|=1$ 或 $-1$ 且 $AB$ 中的$(i,j)$项为 $\sum_{k=1}^n a_{ik}b_{kj}\in\ZZ$, 所以 $G$ 对乘法封闭. 又因为单位阵 $I$显然在 $G$ 中, 且 $IA=AI=A$. 假设 $A$ 的代数余子式为 $A^*$, 因为 $A^*$ 中的 $(i,j)$ 项都是 $A$ 中的项的多项式, 所以 $A^*$ 中的项仍为整数. 因为 $A^{-1}=(\det A)^{-1}A^*$ 且 $\det A=\pm 1$, $\det A^{-1}=\pm 1$, 所以 $A^{-1}\in G$. 显然 $AA^{-1}=A^{-1}A=I$, 故 $G$ 是群.
+\end{solution}
+\begin{question}
+  Let $J$ be a fixed $n\times n$ matrix over $\RR$ with $|J|\neq 0$. Prove that\[G:=\{A\  |\  A\in \RR^{n\times n}, AJA^T=J\}\]is a group respect to the matrix multiplication.
+\end{question}
+\begin{solution}
+  $G\subset \Gl_n(\RR)$, 我们只需证明对任意 $A, B\in G$, 都有 $AB\in G$ 且 $A^{-1}\in G$. 因为 $ABJ(AB)^T=ABJB^TA^T=A(BJB^T)A^T=AJA^T=J$, 所以 $AB\in G$. 因为 $AJA^T=J$, 所以 $J=A^{-1}J(A^T)^{-1}=A^{-1}J(A^{-1})^T$, 所以 $A^{-1}\in G$.
+\end{solution}
+\begin{question}
+  Let $M$ be an arbitrary set, and $P(M)$ be the set consisting of all the subsets of $M$. Prove that $P(M)$ is a group respect to the operation\[A\cdot B=(A-B)\cup (B-A).\]
+\end{question}
+\begin{solution}
+  令 $E=\emptyset$, 对任意 $A\in P(M)$, 我们有 $E\cdot A=A\cdot E=A$, 且 $A\cdot A=E$. 我们需要证明结合性. $(A\cdot B)\cdot C=A\cdot (B\cdot C)$. 注意到可定义双射 $\chi: P(M)\to \hom(M, \ZZ_2)$. 注意到 $\chi_{A\cdot B}=\chi_A+\chi_B$. 从而 $\chi((A\cdot B)\cdot C)=\chi_{A\cdot B}+\chi_C=\chi_A+\chi_B+\chi_C=\chi_A+\chi_{B\cdot C}=\chi_{A\cdot (B\cdot C)}=\chi(A\cdot (B\cdot C))$. 所以 $(A\cdot B)\cdot C=A\cdot (B\cdot C)$.
+\end{solution}
+\begin{question}
+  Let $G$ be a group with operation $\cdot$, and $S$ be a nonempty set. Let $M(S,G)$ be the set consisting of all the map $f: S\to G$ with the operation\[\begin{split}f\ast g: S& \to G,\\s&\mapsto f(s)\cdot g(s)\end{split}\]Prove that $M(S,G)$ is a group respect to above operation $\ast$.
+\end{question}
+\begin{solution}
+  对任意 $s\in S$, 我们有 $(f\ast g)\ast h(s) = (f\ast g)(s)\cdot h(s)=(f(s)\cdot g(s))\cdot h(s)=f(s)\cdot (g(s)\cdot h(s))=f(s)\cdot (g\ast h)(s)=f\ast (g\ast h)(s)$, 即 $(f\ast g)\ast h=f\ast (g\ast h)$. 令 $e:S\to G$ 定义为对任意$s\in $, $e(s)=1_G$. 那么对任意 $s\in S$, $e\ast f(s)=e(s)\cdot f(s)=f(s)=f(s)\cdot e(s)=f\ast e(s)$, 所以 $e\ast f=f\ast e=f$. 对于 $f\in M(S,G)$, 对每个 $s\in S$, 定义 $f^{-1}(s) =f(s)^{-1}$, 那么 $(f\ast f^{-1})(s) = f(s)\cdot f^{-1}(s)=1_G=e(s)=f^{-1}(s)\cdot f(s)=(f^{-1}\ast f)(s)$, 所以 $f\ast f^{-1}=f^{-1}\ast f=e$.
+\end{solution}
+\begin{question}
+  Prove that: for any abelian group $G$, we have\[\circ(ab)\leq \circ(a)\circ(b)\]for any $a,b\in G$. On the same time, point out there exists non-abelian group such that above equality is not valid.
+\end{question}
+\begin{solution}
+  假设 $\circ(a)=m, \circ(b)=n$, 即 $a^m=b^n=e$, 那么又因为 $G$ 是 Abel 群, $(ab)^{mn}=(a^m)^n(b^n)^m=1$. 所以 $\circ(ab)\leq mn$.
+  
+  令 \[a=\begin{pmatrix}0 & -1\\1 & 0\end{pmatrix}, \quad b=\begin{pmatrix} 0 & 1\\-1 & -1 \end{pmatrix}, \quad ab=\begin{pmatrix} 1 & 1 \\0 & 1\end{pmatrix}\]我们发现 $a^4=b^3$ 是单位阵. 那么 $ab$ 的阶是无限的, 要想有限阶, 则可以在模 $n$ 的世界中操作(只需要 $n\geq 13$ 即可).
+\end{solution}
+\begin{question}
+  Prove that the group $(\QQ, 0, +)$ is not isomorphic to $(\QQ^*:=\QQ-\{0\}, 1, x)$.
+\end{question}
+\begin{solution}
+  第一个群没有二阶元, 因为 $2x=0$ 推出 $x=0$; 第二个群存在二阶元, $(-1)^2=1$, 故两个群不同构.
+\end{solution}
+\begin{question}
+  Prove that there exists no simple group $G$ of order $|G|=56$.
+\end{question}
+\begin{solution}
+  根据Sylow定理, Sylow-7子群的个数模7余1, 且是8的因子, 所以有1个或8个. 如果有1个, 那么这个Sylow-7子群是正规子群. 如果有8个, 那么7阶元有$48=(7-1)\ast 8$个, 还剩$56-48=8$个非7阶元. 所以Sylow-2子群只有一个, 故为正规子群.
+\end{solution}
+\begin{question}
+  Prove that any group $G$ of order $|G|=35$ is cyclic, namely $G=(a)$ for some $a\in G$.
+\end{question}
+\begin{solution}
+根据Sylow定理, Sylow-7 子群只有1个 $N$. 而Sylow 5子群也只有一个 $H$. $H$共轭作用在$N$上, 得到一个群作用 $\ZZ_5\isom H\to \aut(N)\isom U(\ZZ_7)=\ZZ_6$. 所以只有平凡作用. 所以对任意$a\in H, b\in N$, 我们有$ab=ba$. 令$x$ 是 $H$ 的生成元, $y$是 $N$ 的生成元, 那么 $xy$的阶是$35$, 所以$G=(xy)$.
+\end{solution}
+\begin{question}
+  Let $\ZZ_n:=\ZZ/n\ZZ$, and $U(\ZZ_n)$ be the group of all units (invertible elements in $\ZZ_n$). Prove that \[\bar{m}\in U(\ZZ_n)\iff (m,n)=1.\]
+\end{question}
+\begin{solution}
+  根据Bezout定理, 如果$(m,n)=1$, 那么存在 $mx+ny=1$, 所以模$n$后得到 $\bar{m}\bar{x}=\bar{1}$, 即 $\bar{m}\in U(\ZZ_n)$.
+  
+  如果$m\in U(\ZZ_n)$, 那么存在$\bar{x}\in\ZZ_n$, $\bar{mx}=\bar{1}$, 所以存在$y\in \ZZ$, 使得$mx+ny=1$. 那么$(m,n)|1$, 即 $(m,n)=1$.
+\end{solution}
+\begin{question}
+  Let $G=(a)$ be a cyclic group of order $n$. Prove that its group of isomorphisms $\aut(G)\isom U(\ZZ_n)$. In particular, when $n=p$ is a prime number, $\aut(G)$ is also cyclic.
+\end{question}
+\begin{solution}
+  由于 $G=(a)$, 任何 $f\in\aut(G)$由$f(a)$决定, 所以$f(a)$是$G$中的$n$阶元. 但是$x\in\ZZ_n$的阶恰是$n/(n,x)$. 所以$\aut(G)\isom U(\ZZ_n)$.
+  
+  有限域的乘法子群是循环群.设$U(\ZZ_p)$中最大阶为$n$, 不妨设$\circ(x)=n$. 由于$U(\ZZ_p)$是交换群, 所以该群中每个元素的阶整除$n$. 如若不然, 存在一个非平凡元素的阶和$n$互素, $\circ(y)=m$, 且$(m,n)=1$.所以$xy$的阶为$mn$, 矛盾. 又因为在域中$x^n=1$的根最多$n$个,所以$n\leq |U(\ZZ_p)|\leq n$.所以存在$p-1$阶元.
+\end{solution}
+\begin{question}
+  Let $R$ be a (noncommutative) ring, and $1-ab$ is invertible. Prove that $1-ba$ is also invertible.
+\end{question}
+\begin{solution}
+  设$(1-ab)c=1$, 那么$(1+bca)(1-ba)=1-ba+bca-bcaba=1-ba+bc(1-ab)a=1$.
+\end{solution}
+\begin{question}
+  Let $R$ be a ring, then a non-zero element $x$ is called by a nilpotent element if $x^n=0$ for some $n\in \ZZ^+$. Prove:
+  \begin{enumerate}
+    \item[(1)] If $x$ is nilpotent, then $1-x$ is invertible.
+    \item[(2)] The ring $\ZZ_m:=\ZZ/m\ZZ$ has a nilpotent element if and only if $m$ can be divisible by $p^2$ for some $p\in\ZZ^+$.
+  \end{enumerate}
+\end{question}
+\begin{solution}
+  \begin{enumerate}
+    \item[(1)] 如果$x^n=0$, 那么$(1-x)(1+x+x^2+\cdots+x^{n-1})=1-x^n=1$. 所以$1-x$是可逆的.
+    \item[(2)] 如果$m=p^2n$, 那么$\bar{pn}\neq 0$, 但是$(\bar{pn})^2=\bar{p^2n}\cdot n=0$. 反之, 不妨假设 $x^2=0, x\neq 0$. 令$h=m/(m,x)\neq 1$, 则 $m = h^2\cdot \frac{(m^2,x^2)}{m}$.
+  \end{enumerate}
+\end{solution}
+\begin{question}
+  Let $m, n\in\ZZ$ be positive. Prove that the great common divisor $(m,n)\in\ZZ$ equals to $(m,n)\in \ZZ[i]$.
+\end{question}
+\begin{solution}
+  假设在$\ZZ$ 中, 我们有$(m,n)=a, m=am', n=an'$. 于是$\ZZ[i]$中, $(m,n)=a(m',n')$. 但是存在$x,y\in \ZZ$使得 $m'x+n'y=1$. 如果$\ZZ[i]$中有素数$p$满足$p|(m',n')$, 那么$p|m'x+n'y$, 即$p|1$, 矛盾.
+\end{solution}
+\begin{question}
+  Let $R$ be a ring. Prove that $f(x)\in R[x]$ is a zero divisor if and only if $r\cdot f(x)=0$ for some $r\neq 0\in R$.
+\end{question}
+\begin{solution}
+  使用反证法. 假设$g$是最小次数的非零多项式使得$fg=0$.令\[\begin{split}
+    f(x)&=a_0+a_1x+\cdots+a_kx^k+\cdots +a_nx^n\\
+    g(x)&=b_0+b_1x+\cdots+b_mx^m
+  \end{split}\]
+  假设$k$是使得$a_kg(x)\neq 0$的最大值, 如果不存在,则对任意$0\leq i\leq m$,都有$b_if(x)=0$,矛盾. 因为$f(x)g(x)=0$,则$a_kb_m=0$, 从而$\deg(a_kg(x))<\deg(g(x))$. 我们有$f(x)(a_kg(x))=0$, 矛盾.
+\end{solution}
+\begin{question}
+  Prove that $\CC[x,y]/(x^2+y^2-1)$ is an Euclidean ring.
+\end{question}
+\begin{solution}
+  令$u=x+iy, v=x-iy$, 那么$R:=\CC[x,y]/(x^2+y^2-1)=\CC[u,v]/(uv-1)\isom\CC[u,u^{-1}]$. 因此$R$中每个非零元素都可以唯一的写为$u^mf(u)$的形式,其中$f(u)\in\CC[u], f(0)\neq 0, m\in\ZZ$.现在定义$u^mf(u)\mapsto \deg(f(u)):R^*\to\NN$的欧式映射$\delta$.对于任意$u^mf(u), u^ng(u)$, 因为$\CC[u]$是欧式环,存在$q(u),r(u)\in\CC[u]$使得\[f(u)=g(u)q(u)+r(u), \quad u^mf(u)=u^ng(u)\cdot u^{m-n}q(u)+u^mr(u)\]那么$\delta(u^mr(u))\leq\deg(r(u))<\delta(u^ng(u))$或$r(u)=0$.所以$\CC[x,y]/(x^2+y^2-1)$是Euclidean环.
+\end{solution}
+\begin{question}
+  Prove that $\RR[x,y]/(x^2+y^2-1)$ is not an UFD.
+\end{question}
+\begin{solution}
+  我们已经证明了$\CC[x,y]/(x^2+y^2-1)$是ED, 从而是UFD.或者说$R=\CC[u,u^{-1}]$是UFD. 考虑$x\cdot x=(1-y)\cdot(1+y)$.在$\CC[u,u^{-1}]$中,\[\begin{split}
+    x&=\frac{1}{2u}(u+i)(u-i)\\1-y&=\frac{i}{2u}(u-i)^2\\1+y&=\frac{-i}{2u}(u+i)^2
+  \end{split}\]所以$x\cdot x=(1-y)\cdot(1+y)$是两个不可约分解.
+\end{solution}
+\begin{question}
+  Prove that $\CC[x,y]/(x^2-y^3)$ is not an UFD.
+\end{question}
+\begin{solution}
+  由于$\CC[x,y]$是UFD, 因为$x^2-y^3$是不可约元,所以是素元, 从而$R:=\CC[x,y]/(x^2-y^3)$是整环.如果赋予$x$次数3, $y$次数2, 那么$R$是分次环, 且$x,y$是不可约元. 因为$x\cdot x=y\cdot y\cdot y$是两个不同的不可约分解. 所以$R$不是UFD.
+\end{solution}
+\begin{question}
+  Prove that $R[x]$ is an UFD, provided $R$ is so.
+\end{question}
+\begin{solution}
+  记$f(x)=\sum_{i=0}^na_ix^i$, 令$d(f)=(a_0,\cdots,a_n)$. 于是$f(x)=d(f)f_0(x)$. 将$f_0(x)$写成$p_1(x)\cdots p_t(x)$的形式,其中$p_i(x)$是不能写成两个次数更低的多项式的乘积.由高斯引理知这些$p_i(x)$是本原多项式,于是不可约; 因为$R$是UFD, $d(f)=a_1\cdots a_s$为$R$中的唯一分解.我们得到一个不可约分解:\[f(x)=a_1\cdots a_sp_1(x)\cdots p_t(x).\]
+  假设$f(x)=b_1\cdots b_kq_1(x)\cdots q_l(x)$是另一个不可约分解, 于是$q(x)=q_1(x)\cdots q_l(x)$和$p(x)=p_1(x)\cdots p_t(x)$是本原多项式.于是$a_1\cdots a_s\cdot d(p(x))\sim d(f)\sim b_1\cdots b_k\cdot d(q(x))$. 因为$R$是UFD, $s=k$,可设$a_i\sim b_i$. 因此存在$u\in U(R)$使得$p(x)=uq(x)$.
+  
+  考虑$K=Q(R)$是$R$的分式域, 则$p_i(x), q_j(x)$也是不可约的. 因为$K[x]$是UFD, 从而$t=l$,可设$p_i(x)=v_iq_i(x), v_i\in K$. 但是$p_i(x)$和$q_i(x)$是本原多项式, 所以$p_i(x)\sim q_i(x)(1\leq i\leq t)$.
+\end{solution}
+\begin{question}
+  Let $F\subset E$ and $E\subset K$ be two finite algebraic extensions. Prove that $F\subset K$ is a finite algebraic extension.
+\end{question}
+\begin{solution}
+  因为$[K:F]=[K:E]\cdot [E:F]$, $E/F$ 和 $K/E$是有限代数扩张, 从而$[K:F]<\infty$.
+\end{solution}
+\begin{question}
+  Prove that the isomorphisms of $\QQ$ and $\RR$ are both trivial (only identities).
+\end{question}
+\begin{solution}
+  设$f\in\aut(\QQ)$, $f(1)=1, f(0)=0$, 对于$n\in\NN$, $f(n)=\underbracket{f(1)+\cdots +f(1)}_{n\text{个}}=n$, $f(-n)=f(0-n)=f(0)-f(n)=-n$.对于$\frac{m}{n}\in \QQ$, $\underbracket{f(\frac{m}{n})+\cdots+f(\frac{m}{n})}_{n\text{个}}=f(n\cdot \frac{m}{n})=f(m)=m$, 从而$f(\frac{m}{n})=\frac{m}{n}$.所以$f=\id_{\QQ}$.
+  
+  假设$g\in\aut(\RR)$,同理可得$g|_{\QQ}=\id_{\QQ}$. 对每个$x>0$, $g(x)=g((\sqrt{x})^2)=g(\sqrt{x})^2>0$, 因此如果$a>b$,我们有$g(a)=g(b)+g(a-b)>g(b)$. 由Dedekind分割,每个无理数$\alpha$和$g(\alpha)$给出有理数相同的分割, 从而$\alpha=g(\alpha)$.
+\end{solution}
+\begin{question}
+  Let $\RR\subset K$ be a finite algebraic extension with $[K:\RR]=2$. Prove that $K$ is isomorphic to $\CC$.
+\end{question}
+\begin{solution}
+  假设$\alpha\in K\setminus\RR$, $\alpha$在$\RR$上的极小多项式为$f(x)\in\RR[x]$.由于$1<\deg f(x)\leq [K:\RR]$, 所以$\deg f(x)=2$. 不妨设$f(x)=x^2+bx+c$. 因为$f(x)$在$\RR[x]$上不可约, 所以$\Delta=b^2-4c<0$.从而$y=\frac{2x+b}{\sqrt{4c-b^2}}\in K$满足$y^2+1=0$.所以$K\supset \RR[y]\supsetneq\RR$, 从而$K=\RR[y]\isom \RR[X]/(X^2+1)\isom\CC$.
+\end{solution}
+\begin{question}
+  Let $\QQ[\sqrt{2}], \QQ[\sqrt{5}]\subset\RR$ be subfields. Prove that $\QQ[\sqrt{2}]$ is not isomorphic to $\QQ[\sqrt{5}]$.
+\end{question}
+\begin{solution}
+  假设$f:\QQ[\sqrt{2}]\to\QQ[\sqrt{5}]$是同构, 设$f(\sqrt{2})=a+b\sqrt{5}, a,b\in \QQ$.  那么$f(\sqrt{2})^2=f(2)=2$, 所以$(a+b\sqrt{5})^2=2$. 展开得$a^2+5b^2+2ab\sqrt{5}=2$,所以$ab=0$. 如果$a=0$, 得$5b^2=2$; 如果$b=0$, 得$a^2=2$. 均得到矛盾.
+\end{solution}
+\begin{question}
+  Let $F$ be a finite field, and $F^*:=F-\{0\}$. Prove that $(F^*,\times,1)$ is a cyclic group.
+\end{question}
+\begin{solution}
+  记$G=F^*$. $G$是一个Abel群. 设$G$中元素阶最大的元素为$a$,且$\circ(a)=n$.首先证明对任意$b\in G$, $b^n=1$.如果不然, 存在$b\in G\setminus\{1\}$, $b$的阶为$m$且$(m,n)=1$. 那么$\circ(ab)=mn$,矛盾.但是在域$F$中$x^n=1$的解最多$n$个,所以$n=\circ(a)\leq |G|\leq n$.所以$n=|G|$, 从而$G=(a)$是循环群.
+\end{solution}
+\begin{question}
+  Construct a non-separable polynomial.
+\end{question}
+\begin{solution}
+  固定一个特征为$p$的完全域$F$.令$K=F(t)$.那么$t\in K\setminus K^p$.记$L=K[\alpha]$是$f$的分裂域, 其中$\alpha^p=t$. 考虑多项式$f(x)=x^p-t$.这是一个那么$f(x)\in K[x]$是不可约多项式. 否则$f(x)=g(x)h(x)$.它在$L[x]$中就变成$(x-\alpha)^p=g(x)h(x)$,故不妨设$g(x)=(x-\alpha)^{n_1}, h(x)=(x-\alpha)^{n_2}$, 从而常数项$u=\alpha^{n_1},v=\alpha^{n_2}\in K$.因为$(n_1,n_2)=1$,存在$a,b\in\ZZ$,使得$an_1+bn_2=1$.从而$u^av^b=\alpha\in K$,$t=\alpha^p\in K^p$,矛盾.
+\end{solution}
+\begin{question}
+  Prove that one can construct regular 17-gons using straight-edge and compass.
+\end{question}
+\begin{solution}
+  因为$\cos\frac{2\pi}{17}$是包含在$\QQ$的某个二次根塔里面.所以可被尺规作图.
+\end{solution}
+\begin{question}
+  Prove that one can not construct regular 7-gons using straight-edge and compass.
+\end{question}
+\begin{solution}
+  考虑7次单位根$\omega$, 则$\omega$的极小多项式是$x^6+x^5+\cdots+x+1=0$. 所以$[\QQ[\omega]:\QQ]=6$不是$2$的幂次, 所以不可以被尺规作图.
+\end{solution}
+\begin{question}
+  Let $K\subset L$ be a Galois extension, and $K\subset E\subset L$. Prove that $E/K$ is Galois if and only if $\gal(L/E)\subset \gal(L/K)$ is a normal subgroup.
+\end{question}
+\begin{solution}
+  如果$E/K$是Galois的,那么所有的$L$的$K$自同构$\sigma$都有$\sigma(E)=E$.考虑$h\in \gal(L/E), g\in \gal(L/K)$,那么对于任意$x\in E$, 我们有$g^{-1}(x)\in E, hg^{-1}(x)=g^{-1}(x)$, 且$ghg^{-1}(x)=gg^{-1}(x)=x$, 所以$ghg^{-1}\in \gal(L/E)$.
+  
+  如果$L$的$K$自同构$\sigma$使得存在$x\in E$, 但是$\sigma(x)\notin E$.存在$h\in\gal(L/E)$使得$y:=h(\sigma(x))\neq\sigma(x)$.那么 $\sigma^{-1}h\sigma(x)=\sigma^{-1}(y)\neq\sigma^{-1}(\sigma(x))=x$.所以$\sigma^{-1}h\sigma\notin\gal(L/E)$.
+\end{solution}
+\begin{question}
+  Prove that $f(x)=x^n-1\in\QQ[x]$ can be solved by radicals.
+\end{question}
+\begin{solution}
+  $x^n-1\in\QQ[x]$的一个分裂域为$L=\QQ[\omega]$,他的全部根的集合
+  \[U_n=\{\omega^k=\cos\frac{2\pi k}{n}+i\sin\frac{2\pi k}{n}\}\]
+  那么$\gal(L/\QQ)$作用在$U_n$上得到单同态$\gal(L/\QQ)\to \aut(U_n)\isom U(\ZZ_n)$.因为这个群是交换群,所以可解.从而$f(x)$可根式解.
+\end{solution}
+\begin{question}
+  Construct a polynomial $f(x)\in \QQ[x]$, which cannot be solved by radicals.
+\end{question}
+\begin{solution}
+取$p=5$使用爱森斯坦判别法可知$f(x)=x^5-80x+5\in\QQ[x]$在$\QQ$上不可约,利用单调性可知$f(x)$恰有两个非实数根, 故$G_f=S_5$不可解.
+\end{solution}
+\begin{question}
+  Prove (by a direct computation) that $\QQ=(\QQ[\sqrt{2},\sqrt{11}])^G$ where $G=\gal(\QQ[\sqrt{2},\sqrt{11}]/QQ)$ is the Galois group.
+\end{question}
+\begin{solution}
+  注意到$\gal(\QQ[\sqrt{2},\sqrt{11}]/\QQ)$同构于$\ZZ_2\times\ZZ_2$,由$\sigma_1:\sqrt{2}\mapsto-\sqrt{2},\quad \sqrt{11}\mapsto\sqrt{11}$和$\sigma_2:\sqrt{2}\mapsto \sqrt{2},\quad \sqrt{11}\mapsto -\sqrt{11}$生成.假设$x=a+b\sqrt{2}+c\sqrt{11}+\sqrt{22}\in (\QQ[\sqrt{2},\sqrt{11}])^G$, 那么$\sigma_1(x)=a-b\sqrt{2}+c\sqrt{11}-d\sqrt{22}$,所以$b=d=0$, $\sigma_2(x)=a-c\sqrt{11}$,所以$c=0$.从而$x=a\in\QQ$.
+\end{solution}
+\end{document} 
